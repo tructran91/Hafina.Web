@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <div class="row page-title align-items-center">
+        <div class="col-md-6 col-xl-6">
+            <h4 class="mb-1 mt-0">{{company.code}} - {{company.name}}</h4>
+        </div>
+        <!-- <div class="col-md-6 col-xl-6 text-md-right">
+            <div class="mt-4 mt-md-0">
+                <a [routerLink]="['/catalog/add-product']">
+                <button type="button" class="btn btn-primary mr-4 mb-3 mb-sm-0">
+                    <i class="uil-plus mr-1"></i> Create New Product</button>
+                </a>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <ngb-tabset>
+                        <ngb-tab title="Thông tin tài chính">
+                          <ng-template ngbTabContent>
+                            <app-ui-preloader [display]='isLoadingData'></app-ui-preloader>
+                                <div [hidden]="isLoadingData">
+                                    <div class="table-responsive" [hidden]="!(financialReport != null)">
+                                        <table class="table table-hover table-sm table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-info btn-sm" [ngClass]="viewBy=='quarter'? 'active': ''" (click)="onViewBy('quarter')" >Theo quý</button>
+                                                            <button type="button" class="btn btn-info btn-sm" [ngClass]="viewBy=='year'? 'active': ''" (click)="onViewBy('year')" >Theo năm</button>
+                                                        </div>
+                                                    </th>
+                                                    <th colspan="4" class="text-right">(1.000 VNĐ)</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-soft-primary btn-sm btn-rounded" (click)="onPrevious()" >Trước</button>
+                                                            <button type="button" class="btn btn-soft-primary btn-sm btn-rounded" (click)="onNext()" >Sau</button>
+                                                        </div>
+                                                    </th>
+                                                    <th class="text-center" *ngFor="let item of financialReport.businessResults">{{item.duration}}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="5">
+                                                        <h5 class="mt-0 mb-0">
+                                                            <div class="icon-item">
+                                                            <i data-feather="hash"></i>
+                                                            <span>Kết quả kinh doanh</span>
+                                                        </div>
+                                                        </h5>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Doanh thu bán hàng và CCDV</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.salesOfGoodsAndServices | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Giá vốn hàng bán</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.costOfGoodsSold | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lợi nhuận gộp về BH và CCDV</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Lợi nhuận tài chính</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                                </tr> -->
+                                                <tr>
+                                                    <td>Lợi nhuận khác</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.otherProfits | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tổng lợi nhuận trước thuế</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.accountingProfitBeforeTax | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lợi nhuận sau thuế</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.profitAfterTaxCorporateIncome | number}}</td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Lợi nhuận sau thuế của công ty mẹ</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.profitAfterTaxOfTheParentCompany | number}}</td>
+                                                </tr> -->
+                                            </tbody>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="5">
+                                                        <h5 class="mt-0 mb-0">
+                                                            <div class="icon-item">
+                                                            <i data-feather="hash"></i>
+                                                            <span>Tài sản</span>
+                                                        </div>
+                                                        </h5>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Tổng tài sản lưu động ngắn hạn</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.balanceSheets">{{item.currentAssets | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tổng tài sản</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.balanceSheets">{{item.totalAssets | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nợ ngắn hạn</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.balanceSheets">{{item.shortTermLiabilities | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tổng nợ</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.balanceSheets">{{item.shortTermLiabilities + item.longTermLiabilities | number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vốn chủ sở hữu</td>
+                                                    <td class="text-right" *ngFor="let item of financialReport.balanceSheets">{{item.ownersEquity | number}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                          </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Dự phóng">
+                          <ng-template ngbTabContent>
+                              <h1>coding...</h1>
+                          </ng-template>
+                        </ngb-tab>
+                      </ngb-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

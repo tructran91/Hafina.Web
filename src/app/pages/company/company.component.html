@@ -3,14 +3,6 @@
         <div class="col-md-6 col-xl-6">
             <h4 class="mb-1 mt-0">{{company.code}} - {{company.name}}</h4>
         </div>
-        <!-- <div class="col-md-6 col-xl-6 text-md-right">
-            <div class="mt-4 mt-md-0">
-                <a [routerLink]="['/catalog/add-product']">
-                <button type="button" class="btn btn-primary mr-4 mb-3 mb-sm-0">
-                    <i class="uil-plus mr-1"></i> Create New Product</button>
-                </a>
-            </div>
-        </div> -->
     </div>
 
     <div class="row">
@@ -129,18 +121,19 @@
                         </ngb-tab>
                         <ngb-tab title="Dự phóng">
                           <ng-template ngbTabContent>
-                            <div class="table-responsive" [hidden]="!(financialReport != null)">
+                            <div class="table-responsive">
                                 <table class="table table-hover table-sm table-striped mb-0">
                                     <thead>
                                         <tr>
-                                            <th colspan="5" class="text-right">(1.000 VNĐ)</th>
+                                            <th colspan="6" class="text-right">(1.000 VNĐ)</th>
                                         </tr>
                                         <tr>
                                             <th></th>
                                             <th class="text-center" *ngFor="let item of forecastBusinessResults;">{{item.duration}}</th>
+                                            <th>Tỉ lệ tăng trưởng (%)</th>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">
+                                            <th colspan="6">
                                                 <h5 class="mt-0 mb-0">
                                                     <div class="icon-item">
                                                     <i data-feather="hash"></i>
@@ -152,32 +145,38 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Doanh thu bán hàng và CCDV</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.salesOfGoodsAndServices | number}}</td>
+                                            <td class="align-middle">Doanh thu bán hàng và CCDV</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.salesOfGoodsAndServices | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateSalesOfGoodsAndServices" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Giá vốn hàng bán</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.costOfGoodsSold | number}}</td>
+                                            <td class="align-middle">Giá vốn hàng bán</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.costOfGoodsSold | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateCostOfGoodsSold" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Lợi nhuận gộp về BH và CCDV</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                            <td class="align-middle">Lợi nhuận gộp về BH và CCDV</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateGrossProfitOfGoodsAndServices" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Lợi nhuận tài chính</td>
                                             <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
                                         </tr> -->
                                         <tr>
-                                            <td>Lợi nhuận khác</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.otherProfits | number}}</td>
+                                            <td class="align-middle">Lợi nhuận khác</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.otherProfits | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateOtherProfits" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Tổng lợi nhuận trước thuế</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.accountingProfitBeforeTax | number}}</td>
+                                            <td class="align-middle">Tổng lợi nhuận trước thuế</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.accountingProfitBeforeTax | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateAccountingProfitBeforeTax" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Lợi nhuận sau thuế</td>
-                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.profitAfterTaxCorporateIncome | number}}</td>
+                                            <td class="align-middle">Lợi nhuận sau thuế</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBusinessResults">{{item.profitAfterTaxCorporateIncome | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateProfitAfterTaxCorporateIncome" (ngModelChange)="calculateForecastBusinessResult()"/></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Lợi nhuận sau thuế của công ty mẹ</td>
@@ -198,24 +197,29 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Tổng tài sản lưu động ngắn hạn</td>
-                                            <td class="text-right"></td>
+                                            <td class="align-middle">Tổng tài sản lưu động ngắn hạn</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBalanceSheets">{{item.currentAssets | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateCurrentAssets" (ngModelChange)="calculateForecastBalanceSheet()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Tổng tài sản</td>
-                                            <td class="text-right"></td>
+                                            <td class="align-middle">Tổng tài sản</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBalanceSheets">{{item.totalAssets | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateTotalAssets" (ngModelChange)="calculateForecastBalanceSheet()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Nợ ngắn hạn</td>
-                                            <td class="text-right"></td>
+                                            <td class="align-middle">Nợ ngắn hạn</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBalanceSheets">{{item.shortTermLiabilities | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateShortTermLiabilities" (ngModelChange)="calculateForecastBalanceSheet()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Tổng nợ</td>
-                                            <td class="text-right"></td>
+                                            <td class="align-middle">Tổng nợ</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBalanceSheets">{{item.shortTermLiabilities + item.longTermLiabilities | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateShortTermLiabilities + inputGrowthRateLongTermLiabilities" (ngModelChange)="calculateForecastBalanceSheet()"/></td>
                                         </tr>
                                         <tr>
-                                            <td>Vốn chủ sở hữu</td>
-                                            <td class="text-right"></td>
+                                            <td class="align-middle">Vốn chủ sở hữu</td>
+                                            <td class="align-middle text-right" *ngFor="let item of forecastBalanceSheets">{{item.ownersEquity | number}}</td>
+                                            <td><input type="number" class="form-control" [(ngModel)]="inputGrowthRateOwnersEquity" (ngModelChange)="calculateForecastBalanceSheet()"/></td>
                                         </tr>
                                     </tbody>
                                 </table>

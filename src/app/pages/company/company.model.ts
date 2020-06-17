@@ -6,7 +6,7 @@ export class CompanyModel {
     code: string = '';
 }
 
-export class BalanceSheet {
+export class BalanceSheetModel {
     balanceSheetId: number;
 
     // Tài sản ngắn hạn
@@ -67,7 +67,7 @@ export class BalanceSheet {
     duration: string;
 }
 
-export class BusinessResult {
+export class BusinessResultModel {
     businessResultId: number;
 
     // Doanh thu bán hàng và cung cấp dịch vụ
@@ -150,8 +150,8 @@ export class BusinessResult {
 }
 
 export class FinancialReportModel {
-    balanceSheets: Array<BalanceSheet>;
-    businessResults: Array<BusinessResult>;
+    balanceSheets: Array<BalanceSheetModel>;
+    businessResults: Array<BusinessResultModel>;
     pagination: Pagination;
 }
 
@@ -201,6 +201,6 @@ export class ForecastBalanceSheetModel {
 export class ForecastReportModel {
     indicatorsBusinessResult : ForecastBusinessResultModel;
     indicatorsBalanceSheet: ForecastBalanceSheetModel;
-    latestBusinessResultByAnnual: BusinessResult;
-    latestBalanceSheetByAnnual: BalanceSheet;
+    latestBusinessResultByAnnual: BusinessResultModel;
+    latestBalanceSheetByAnnual: BalanceSheetModel;
 }

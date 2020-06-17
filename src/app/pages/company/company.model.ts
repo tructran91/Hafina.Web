@@ -1,12 +1,12 @@
 import { Pagination } from 'src/app/core/models/pagination.model';
 
-export class CompanyModel{
+export class CompanyModel {
     companyId: number = 0;
     name: string = '';
     code: string = '';
 }
 
-export class BalanceSheet{
+export class BalanceSheet {
     balanceSheetId: number;
 
     // Tài sản ngắn hạn
@@ -67,7 +67,7 @@ export class BalanceSheet{
     duration: string;
 }
 
-export class BusinessResult{
+export class BusinessResult {
     businessResultId: number;
 
     // Doanh thu bán hàng và cung cấp dịch vụ
@@ -149,8 +149,58 @@ export class BusinessResult{
     duration: string;
 }
 
-export class FinancialReportModel{
+export class FinancialReportModel {
     balanceSheets: Array<BalanceSheet>;
     businessResults: Array<BusinessResult>;
     pagination: Pagination;
+}
+
+// Forecast
+
+export class ForecastBusinessResultModel {
+    // Tốc độ tăng trưởng doanh thu bán hàng và cung cấp dịch vụ hàng năm
+    growthRateSalesOfGoodsAndServicesYoY: number;
+
+    // Tốc độ tăng trưởng giá vốn hàng bán hàng năm
+    growthRateCostOfGoodsSoldYoY: number;
+
+    // Tốc độ tăng trưởng lợi nhuận gộp về bán hàng và cung cấp dịch vụ hàng năm
+    growthRateGrossProfitOfGoodsAndServicesYoY: number;
+
+    // Tốc độ tăng trưởng lợi nhuận khác hàng năm
+    growthRateOtherProfitsYoY: number;
+
+    // Tốc độ tăng trưởng tổng lợi nhuận kế toán trước thuế hàng năm
+    growthRateAccountingProfitBeforeTaxYoY: number;
+
+    // Tốc độ tăng trưởng lợi nhuận sau thuế thu nhập doanh nghiệp hàng năm
+    growthRateProfitAfterTaxCorporateIncomeYoY: number;
+
+    duration: string;
+}
+
+export class ForecastBalanceSheetModel {
+    // Tốc độ tăng trưởng tài sản ngắn hạn hàng năm
+    growthRateCurrentAssetsYoY: number;
+
+    // Tốc độ tăng trưởng tổng cộng tài sản hàng năm
+    growthRateTotalAssetsYoy: number;
+
+    // Tốc độ tăng trưởng nợ ngắn hạn hàng năm
+    growthRateShortTermLiabilitiesYoY: number;
+
+    // Tốc độ tăng trưởng nợ dài hạn hàng năm
+    growthRateLongTermLiabilitiesYoY: number;
+
+    // Tốc độ tăng trưởng vốn chủ sở hữu hàng năm
+    growthRateOwnersEquityYoY: number;
+
+    duration: string;
+}
+
+export class ForecastReportModel {
+    indicatorsBusinessResult : ForecastBusinessResultModel;
+    indicatorsBalanceSheet: ForecastBalanceSheetModel;
+    latestBusinessResultByAnnual: BusinessResult;
+    latestBalanceSheetByAnnual: BalanceSheet;
 }

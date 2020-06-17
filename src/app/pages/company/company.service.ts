@@ -22,4 +22,8 @@ export class CompanyService extends BaseService {
     let param = `${companyCode}?type=${viewBy}&page=${page}`
     return this.doGet(Constants.FinancialReport, param);
   }
+
+  getForecastReport(companyCode: string): Observable<any> {
+    return this.doGet(Constants.ForecastReport, `${companyCode}`);
+  }
 }

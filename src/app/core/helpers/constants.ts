@@ -6,4 +6,5 @@ export class Constants {
   public static readonly Authen = 'authen';
   public static readonly Company = 'api/company';
   public static readonly FinancialReport = 'api/financialReport';
+  public static readonly ForecastReport = 'api/forecastReport';
 }

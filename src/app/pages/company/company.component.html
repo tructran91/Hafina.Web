@@ -129,7 +129,97 @@
                         </ngb-tab>
                         <ngb-tab title="Dự phóng">
                           <ng-template ngbTabContent>
-                              <h1>coding...</h1>
+                            <div class="table-responsive" [hidden]="!(financialReport != null)">
+                                <table class="table table-hover table-sm table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5" class="text-right">(1.000 VNĐ)</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th class="text-center" *ngFor="let item of forecastBusinessResults;">{{item.duration}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">
+                                                <h5 class="mt-0 mb-0">
+                                                    <div class="icon-item">
+                                                    <i data-feather="hash"></i>
+                                                    <span>Kết quả kinh doanh dự phóng</span>
+                                                </div>
+                                                </h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Doanh thu bán hàng và CCDV</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.salesOfGoodsAndServices | number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giá vốn hàng bán</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.costOfGoodsSold | number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lợi nhuận gộp về BH và CCDV</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>Lợi nhuận tài chính</td>
+                                            <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.grossProfitOfGoodsAndServices | number}}</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>Lợi nhuận khác</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.otherProfits | number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tổng lợi nhuận trước thuế</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.accountingProfitBeforeTax | number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lợi nhuận sau thuế</td>
+                                            <td class="text-right" *ngFor="let item of forecastBusinessResults">{{item.profitAfterTaxCorporateIncome | number}}</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>Lợi nhuận sau thuế của công ty mẹ</td>
+                                            <td class="text-right" *ngFor="let item of financialReport.businessResults">{{item.profitAfterTaxOfTheParentCompany | number}}</td>
+                                        </tr> -->
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="5">
+                                                <h5 class="mt-0 mb-0">
+                                                    <div class="icon-item">
+                                                    <i data-feather="hash"></i>
+                                                    <span>Tài sản dự phóng</span>
+                                                </div>
+                                                </h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tổng tài sản lưu động ngắn hạn</td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tổng tài sản</td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nợ ngắn hạn</td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tổng nợ</td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vốn chủ sở hữu</td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                           </ng-template>
                         </ngb-tab>
                       </ngb-tabset>

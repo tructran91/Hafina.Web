@@ -19,9 +19,14 @@ export const MENU: MenuItem[] = [
         isTitle: true
     },
     {
-        label: 'Company',
+        label: 'Công ty',
         icon: 'calendar',
         link: '/company',
+    },
+    {
+        label: 'Đồ thị',
+        icon: 'calendar',
+        link: '/chart',
     },
     {
         label: 'Calendar',
@@ -82,10 +87,6 @@ export const MENU: MenuItem[] = [
         label: 'Pages',
         icon: 'file-text',
         subItems: [
-            {
-                label: 'Starter',
-                link: '/other/pages-starter'
-            },
             {
                 label: 'Profile',
                 link: '/other/pages-profile'

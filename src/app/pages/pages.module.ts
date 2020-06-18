@@ -18,9 +18,10 @@ import { OtherModule } from './other/other.module';
 import { IconsRoutingModule } from './ui/icons/icons-routing.module';
 import { CompanyService } from './company/company.service';
 import { EventService } from '../core/services/event.service';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [DashboardComponent, CompanyComponent],
+  declarations: [DashboardComponent, CompanyComponent, ChartComponent],
   imports: [
     CommonModule,
     FormsModule,

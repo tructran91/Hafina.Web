@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompanyService } from './company.service';
-import { FinancialReportModel, CompanyModel, ForecastReportModel, BusinessResultModel, BalanceSheetModel } from './company.model';
 import { EventService } from 'src/app/core/services/event.service';
 import {plainToClass} from 'class-transformer';
+import { FinancialReportModel } from 'src/app/core/models/financial-report.model';
+import { ForecastReportModel } from 'src/app/core/models/forecast/forecast-report.model';
+import { BusinessResultModel } from 'src/app/core/models/business-result.model';
+import { BalanceSheetModel } from 'src/app/core/models/balance-sheet.model';
+import { CompanyModel } from 'src/app/core/models/company.model';
 
 @Component({
   selector: 'app-company',

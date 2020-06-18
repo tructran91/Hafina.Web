@@ -7,7 +7,6 @@ import { UIModule } from '../../shared/ui/ui.module';
 import { ProjectModule } from '../apps/project/project.module';
 import { NgbTabsetModule, NgbTooltipModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { StarterComponent } from './starter/starter.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ActivityComponent } from './activity/activity.component';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -26,7 +25,7 @@ import { Error404Component } from './error404/error404.component';
         ProjectModule
     ],
     // tslint:disable-next-line: max-line-length
-    declarations: [StarterComponent, ProfileComponent, ActivityComponent, InvoiceComponent, PricingComponent, Error500Component, Error404Component]
+    declarations: [ProfileComponent, ActivityComponent, InvoiceComponent, PricingComponent, Error500Component, Error404Component]
 })
 
 export class OtherModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompanyService } from './company.service';
 import { FinancialReportModel, CompanyModel, ForecastReportModel, BusinessResultModel, BalanceSheetModel } from './company.model';
 import { EventService } from 'src/app/core/services/event.service';
+import {plainToClass} from 'class-transformer';
 
 @Component({
   selector: 'app-company',
@@ -44,7 +45,8 @@ export class CompanyComponent implements OnInit, OnDestroy {
   //#region get data
   getFinancialReport() {
     this.companyService.getFinancialReport(this.companyCode, this.viewBy, this.page).subscribe(data => {
-      this.financialReport = data;
+      this.financialReport = plainToClass(FinancialReportModel, data);
+      console.log(this.financialReport);
       this.page = this.financialReport.pagination.actualPage;
       this.isLoadingData = false;
     });

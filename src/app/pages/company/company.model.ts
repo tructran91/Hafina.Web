@@ -1,4 +1,5 @@
 import { Pagination } from 'src/app/core/models/pagination.model';
+import { Type } from "class-transformer";
 
 export class CompanyModel {
     companyId: number = 0;
@@ -150,8 +151,11 @@ export class BusinessResultModel {
 }
 
 export class FinancialReportModel {
+    @Type(() => BalanceSheetModel)
     balanceSheets: Array<BalanceSheetModel>;
+    @Type(() => BusinessResultModel)
     businessResults: Array<BusinessResultModel>;
+    @Type(() => Pagination)
     pagination: Pagination;
 }
 

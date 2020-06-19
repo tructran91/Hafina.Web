@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row page-title align-items-center">
+    <div class="col-md-6 col-xl-6">
+      <h4 class="mb-1 mt-0">Tính toán lãi suất kép</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mt-0">LÃI KÉP LÀ GÌ?</h4>
+          <p class="sub-header">
+            Lãi kép (còn gọi là lãi suất kép) được hiểu đơn giản là sau khi lấy lãi về, dồn vào tiền vốn, 
+            tiếp tục đưa tất cả số tiền đó tái đầu tư để lấy về lãi có giá trị cao hơn ở chu kỳ sau. 
+            Lãi kép có 2 yếu tố là <b>thời gian</b> và <b>lãi suất</b>.
+          </p>
+          <h4 class="header-title mt-0">SỨC MẠNH CỦA LÃI KÉP</h4>
+          <p class="sub-header">
+            Khái niệm lãi kép nghe cũng bình thường phải không? Trên thực tế, khi tận dụng lãi kép, 
+            qua vài năm đầu sẽ không thấy gì khác biệt. Nếu như bạn kiên nhẫn và có kỷ luật trong việc đầu tư, 
+            sau khoảng 20, 30 năm, số tài sản sinh ra sẽ khủng khiếp đến bất ngờ.
+          </p>
+
+          <div class="mb-5 mt-5">
+            <div class="form-group row mb-0">
+              <label class="col-md-2 col-form-label">Vốn ban đầu</label>
+              <div class="col-md-10">
+                  <input class="custom-range mt-1" type="range" name="range" min="10000000" max="1000000000"
+                  [(ngModel)]="initialCapital" (ngModelChange)="calculateCompoundInterest()">
+                  <span>{{initialCapital | number}}</span>
+              </div>
+            </div>
+            <div class="form-group row mb-0">
+              <label class="col-md-2 col-form-label">Tỉ lệ lãi 1 năm</label>
+              <div class="col-md-10">
+                  <input class="custom-range mt-1" type="range" name="range" min="1" max="100"
+                  [(ngModel)]="interestRatePerYear" (ngModelChange)="calculateCompoundInterest()">
+                  <span>{{interestRatePerYear}} %</span>
+              </div>
+            </div>
+            <div class="form-group row mb-0">
+              <label class="col-md-2 col-form-label">Thời gian</label>
+              <div class="col-md-10">
+                  <input class="custom-range mt-1" type="range" name="range" min="1" max="50"
+                  [(ngModel)]="termOfYear" (ngModelChange)="calculateCompoundInterest()">
+                  <span>{{termOfYear}} năm</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-center mb-3 mt-0">Kết quả sau {{termOfYear}} năm</h4>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Năm thứ</th>
+                    <th>Vốn ban đầu</th>
+                    <th>Vốn + lãi sau 1 năm</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of capitalTable">
+                    <td>{{item.no}}</td>
+                    <td>{{item.capital | number: '0.0-0'}}</td>
+                    <td>{{item.capitalEndTerm | number : '0.0-0'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

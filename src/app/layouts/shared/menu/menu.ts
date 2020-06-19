@@ -2,10 +2,6 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
     {
-        label: 'Navigation',
-        isTitle: true
-    },
-    {
         label: 'Dashboard',
         icon: 'home',
         link: '/',
@@ -15,22 +11,27 @@ export const MENU: MenuItem[] = [
         }
     },
     {
-        label: 'Apps',
-        isTitle: true
-    },
-    {
         label: 'Công ty',
         icon: 'calendar',
         link: '/company',
     },
     {
         label: 'Đồ thị',
-        icon: 'calendar',
-        link: '/chart',
+        icon: 'trending-up',
+        link: '/do-thi',
+    },
+    {
+        label: 'Lãi suất kép',
+        icon: 'percent',
+        link: '/lai-suat-kep',
+    },
+    {
+        label: 'Apps',
+        isTitle: true
     },
     {
         label: 'Calendar',
-        icon: 'calendar',
+        icon: 'pie-chart',
         link: '/apps-calendar',
     },
     {
